@@ -77,6 +77,15 @@ services:
         - frontend
         - backend
 
+### yarn Container #######################################
+    yarn:
+      build:
+        context: ./node
+      volumes_from:
+        - applications
+      working_dir: /var/www/frontend
+      entrypoint: yarn
+          
 ### PHP-FPM Container #######################################
 
     php-fpm:
