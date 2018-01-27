@@ -63,6 +63,22 @@ services:
         - frontend
         - backend
 
+### node Container #######################################
+    node:
+      build:
+        context: ./node
+      volumes_from:
+        - applications
+      ports:
+        - ${NG_PORT}:4200
+        - ${NODE_PORT}:8080
+        - ${SSR_PORT}:4000
+      working_dir: /var/www/frontend
+      command: /bin/bash -c "yarn && yarn run build && yarn run serve"
+      networks:
+        - frontend
+        - backend
+
 ### PHP-FPM Container #######################################
 
     php-fpm:
