@@ -79,6 +79,23 @@ services:
         - frontend
         - backend
 
+### proxy-backend-frontend Container #######################################
+    proxy-backend-frontend:
+      build:
+        context: ./proxy-backend-frontend
+      ports:
+        - 80:80
+        - 443:443
+      volumes:
+        #        - .data/proxy/logs:/var/log/nginx
+        - ./proxy-backend-frontend/sites:/etc/nginx/sites-available
+      networks:
+        - frontend
+        - backend
+      depends_on:
+        - node
+        - nginx
+          
 ### yarn Container #######################################
     yarn:
       build:
